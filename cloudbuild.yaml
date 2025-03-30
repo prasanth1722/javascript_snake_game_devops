@@ -1,9 +1,4 @@
 steps:
-  # Authenticate with Artifact Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['login', '-u', 'oauth2accesstoken', '--password-stdin', 'https://us-central1-docker.pkg.dev']
-    secretEnv: ['ACCESS_TOKEN']
-  
   # Build and tag the image
   - name: 'gcr.io/cloud-builders/docker'
     args: [
@@ -35,8 +30,3 @@ steps:
 
 options:
   logging: CLOUD_LOGGING_ONLY
-
-secrets:
-  - kmsKeyName: projects/$PROJECT_ID/locations/global/keyRings/cloud-build/cryptoKeys/cloud-build
-    secretEnv:
-      ACCESS_TOKEN: $(gcloud auth print-access-token)
