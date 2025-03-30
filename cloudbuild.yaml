@@ -1,12 +1,23 @@
 steps:
-  # Build and deploy to Cloud Run
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['run', 'deploy', 'snake-game', 
-          '--image', 'gcr.io/$PROJECT_ID/snake-game', 
-          '--platform', 'managed',
-          '--region', 'us-central1',
-          '--allow-unauthenticated',
-          '--source', '.']
+  # Build and push to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/snake-repo/snake-game', '.']
+    
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/snake-repo/snake-game']
+  
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'snake-game'
+      - '--image=us-central1-docker.pkg.dev/$PROJECT_ID/snake-repo/snake-game'
+      - '--platform=managed'
+      - '--region=us-central1'
+      - '--allow-unauthenticated'
+      - '--source=.'
 
 options:
   logging: CLOUD_LOGGING_ONLY
