@@ -1,4 +1,4 @@
-# Use the official lightweight Node.js image
+# Use official Node.js 18 image
 FROM node:18-alpine
 
 # Create app directory
@@ -7,11 +7,11 @@ WORKDIR /usr/src/app
 # Copy package files
 COPY package*.json ./
 
-# Install production dependencies
-RUN npm install --only=production
+# Install serve globally
+RUN npm install -g serve
 
 # Copy app source
 COPY public ./public
 
-# Use serve to run the app
-CMD ["npx", "serve", "-s", "public"]
+# Serve the app on port 3000
+CMD ["serve", "-s", "public", "-l", "3000"]
