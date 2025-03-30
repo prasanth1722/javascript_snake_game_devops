@@ -1,28 +1,10 @@
 {
   "name": "snake-game",
   "version": "1.0.0",
-  "description": "A classic Snake game built with JavaScript, deployed to Google Cloud Run",
-  "main": "public/script.js",
+  "description": "JavaScript Snake Game",
   "scripts": {
-    "start": "serve -s public -l 3000",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "serve -s public -l 3000"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/prasanth1722/javascript_snake_game_devops.git"
-  },
-  "keywords": [
-    "snake",
-    "game",
-    "javascript",
-    "cloud-run"
-  ],
-  "author": "Your Name",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/prasanth1722/javascript_snake_game_devops/issues"
-  },
-  "homepage": "https://github.com/prasanth1722/javascript_snake_game_devops#readme",
   "dependencies": {
     "serve": "^14.2.0"
   },
